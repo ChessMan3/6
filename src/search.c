@@ -445,10 +445,9 @@ void thread_search(Pos *pos)
 
       // Reset aspiration window starting size
       if (pos->rootDepth >= 5 * ONE_PLY) {
-        Value prevScore = rootMoves[PVIdx].previousScore;
-        delta = Value(int(17.0 + 0.025 * abs(prevScore)));     
-        alpha = std::max(prevScore - delta,-VALUE_INFINITE); 
-        beta  = std::min(prevScore + delta, VALUE_INFINITE); 
+        delta = Value(int(17.0 + 0.025 * get_abs(prevScore)));
+        alpha = max(rm->move[PVIdx].previousScore - delta,-VALUE_INFINITE);
+        beta  = min(rm->move[PVIdx].previousScore + delta, VALUE_INFINITE);
       }
 
       // Start with a small aspiration window and, in the case of a fail
