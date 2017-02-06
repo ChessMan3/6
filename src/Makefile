@@ -25,7 +25,7 @@
 UNAME = $(shell uname)
 
 ### Executable name
-EXE = CorChess
+EXE = cfish
 
 ### Installation dir definitions
 PREFIX = /usr/local
