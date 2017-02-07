@@ -445,7 +445,7 @@ void thread_search(Pos *pos)
 
       // Reset aspiration window starting size
       if (pos->rootDepth >= 5 * ONE_PLY) {
-              delta = (Value)18;
+              delta = (Value)int_(17.0 + 0.025 * abs(rm->move[PVIdx].previousScore));
               alpha = max(rm->move[PVIdx].previousScore - delta,-VALUE_INFINITE);
               beta  = min(rm->move[PVIdx].previousScore + delta, VALUE_INFINITE);
       }
