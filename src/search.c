@@ -333,7 +333,8 @@ void mainthread_search(void)
       Pos *p = Threads.pos[idx];
       Depth depthDiff = p->completedDepth - bestThread->completedDepth;
       Value scoreDiff = p->rootMoves->move[0].score - bestThread->rootMoves->move[0].score;
-      if ( (scoreDiff > 0 && depthDiff >= 0) )
+      if (   (depthDiff > 0 && scoreDiff >= 0)
+          || (scoreDiff > 0 && depthDiff >= 0))
         bestThread = p;
     }
   }
@@ -547,7 +548,7 @@ void thread_search(Pos *pos)
 
         int doEasyMove =   rm->move[0].pv[0] == easyMove
                          && mainThread.bestMoveChanges < 0.03
-                         && time_elapsed() > time_optimum() * 5 / 44;
+                         && time_elapsed() > time_optimum() * 5 / 42;
 
         if (   rm->size == 1
             || time_elapsed() > time_optimum() * unstablePvFactor * improvingFactor / 628
